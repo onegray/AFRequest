@@ -109,7 +109,8 @@
 	}
 }
 
-- (void)cancelRequestsForTarget:(id)target {
+- (void)cancelRequestsForTarget:(id)target
+{
     for (AFHTTPRequestOperation *op in [self.operationQueue operations]) {
 		if(![op isCancelled]) {
 			if(op.ownerRequest.target == target) {
