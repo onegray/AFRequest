@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.objective-c-source</string>
+	</array>
+	<key>Description</key>
+	<string>AFRequest and AFResponse classes, with implementation and header files.</string>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>MainTemplateFile</key>
+	<string>___FILEBASENAME___Request.m</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Description</key>
+			<string>The template name for the request classes. *Request and *Response suffixes will be added. Example: TwitterSearch</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Name</key>
+			<string>Request Name</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>text</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>hidden</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Values</key>
+			<array>
+				<string>Request</string>
+			</array>
+			<key>Default</key>
+			<string>Request</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>false</string>
+			<key>Identifier</key>
+			<string>MultipartFormData</string>
+			<key>Name</key>
+			<string>Multipart form data request</string>
+			<key>Type</key>
+			<string>checkbox</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>paramCount</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Name</key>
+			<string>Param Count</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Default</key>
+			<string>NoParams</string>
+			<key>Values</key>
+			<array>
+				<string>NoParams</string>
+				<string>1</string>
+				<string>2</string>
+				<string>3</string>
+			</array>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Description</key>
+			<string>Param name. Example: UserName</string>
+			<key>Identifier</key>
+			<string>param1</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Name</key>
+			<string>Param1</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>paramCount</key>
+				<array>
+					<string>1</string>
+					<string>2</string>
+					<string>3</string>
+				</array>
+			</dict>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Description</key>
+			<string>Param name. Example: Password</string>
+			<key>Identifier</key>
+			<string>param2</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Name</key>
+			<string>Param2</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>paramCount</key>
+				<array>
+					<string>2</string>
+					<string>3</string>
+				</array>
+			</dict>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Description</key>
+			<string>Param name. Example: Param</string>
+			<key>Identifier</key>
+			<string>param3</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>Name</key>
+			<string>Param3</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>paramCount</key>
+				<array>
+					<string>3</string>
+				</array>
+			</dict>
+			<key>Required</key>
+			<true/>
+		</dict>
+	</array>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>Summary</key>
+	<string>HRRequest and HRResponse classes, with implementation and header files.</string>
+</dict>
+</plist>
