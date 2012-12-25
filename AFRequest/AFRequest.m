@@ -42,7 +42,7 @@ static char OWNER_KEY;
 }
 
 -(void) setOwnerRequest:(AFRequest*)owner {
-	objc_setAssociatedObject(self, &OWNER_KEY, owner, OBJC_ASSOCIATION_ASSIGN);
+	objc_setAssociatedObject(self, &OWNER_KEY, owner, OBJC_ASSOCIATION_RETAIN);
 }
 @end
 
@@ -50,6 +50,7 @@ static char OWNER_KEY;
 {
 	BOOL _cancelled;
 	Class _responseClass;
+	__weak AFHTTPRequestOperation* _operation;
 }
 @property (nonatomic, copy) void (^completionHandler)(AFRequest* request, AFResponse* response);
 
@@ -105,15 +106,16 @@ static char OWNER_KEY;
 
 -(int) responseStatusCode
 {
+	NSAssert(_operation!=nil, @"Request operation has been finished, check -[AFResponse statusCode] instead");
 	return _operation.response.statusCode;
 }
 
 -(void) setOperation:(AFHTTPRequestOperation*)op
 {
 	if(_operation!=op) {
+		op.ownerRequest = self;
 		_operation.ownerRequest = nil;
 		_operation = op;
-		_operation.ownerRequest = self;
 	}
 }
 
@@ -122,9 +124,10 @@ static char OWNER_KEY;
 					failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))onFailure
 {
 	_retryCount++;
-	self.operation = _buildRequestOperation(connection, onSuccess, onFailure);
-	_cancelled = _operation.isCancelled;
-	[connection enqueueHTTPRequestOperation:_operation];
+	AFHTTPRequestOperation* strongOp = _buildRequestOperation(connection, onSuccess, onFailure);
+	[self setOperation:strongOp];
+	_cancelled = strongOp.isCancelled;
+	[connection enqueueHTTPRequestOperation:strongOp];
 }
 
 

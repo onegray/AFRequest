@@ -32,11 +32,6 @@
     return self;
 }
 
--(void) dealloc
-{
-	NSLog(@"%@ dealloc", self);
-}
-
 @end
 
 
@@ -62,11 +57,6 @@
         self.searchResults = results;
 	}
 	return self;
-}
-
--(void) dealloc
-{
-	NSLog(@"%@ dealloc", self);
 }
 
 @end

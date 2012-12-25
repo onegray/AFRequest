@@ -112,12 +112,27 @@
 - (void)cancelRequestsForTarget:(id)target
 {
     for (AFHTTPRequestOperation *op in [self.operationQueue operations]) {
-		if(![op isCancelled]) {
-			if(op.ownerRequest.target == target) {
-				[op.ownerRequest cancel];
-			}
+		if(op.ownerRequest.target == target) {
+			[op.ownerRequest cancel];
 		}
 	}
 }
+
+- (void)cancelRequestsOfClass:(Class)requestClass
+{
+    for (AFHTTPRequestOperation *op in [self.operationQueue operations]) {
+		if([op.ownerRequest isKindOfClass:requestClass]) {
+			[op.ownerRequest cancel];
+		}
+	}
+}
+
+- (void)cancelAllRequests
+{
+    for (AFHTTPRequestOperation *op in [self.operationQueue operations]) {
+		[op.ownerRequest cancel];
+	}
+}
+
 
 @end
