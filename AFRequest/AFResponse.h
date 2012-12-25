@@ -27,7 +27,7 @@
 
 @interface AFResponse : NSObject
 
-@property (nonatomic, readonly) BOOL succeed;
+@property (nonatomic, readonly) BOOL success;
 @property (nonatomic, readonly) int statusCode;
 @property (nonatomic, readonly) NSError* error;
 

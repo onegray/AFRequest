@@ -33,7 +33,7 @@ static const int kAFErrorCode = 101;
 -(id) initWithResponseObject:(id)responseObject statusCode:(int)statusCode
 {
 	if(self=[super init]) {
-		_succeed = YES;
+		_success = YES;
 		_statusCode = statusCode;
 	}
 	return self;
@@ -42,7 +42,7 @@ static const int kAFErrorCode = 101;
 -(id) initWithError:(NSError*)anError statusCode:(int)statusCode
 {
 	if(self=[super init]) {
-		_succeed = NO;
+		_success = NO;
 		_statusCode = statusCode;
 		_error = anError;
 	}
@@ -71,7 +71,7 @@ static const int kAFErrorCode = 101;
 {
 	NSDictionary* errorInfo = [NSDictionary dictionaryWithObject:errorMsg forKey:NSLocalizedDescriptionKey];
 	_error = [NSError errorWithDomain:kAFErrorDomain code:kAFErrorCode userInfo:errorInfo];
-	_succeed = NO;
+	_success = NO;
 }
 
 @end

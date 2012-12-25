@@ -43,7 +43,7 @@
 
 -(void) requestTwitterSearch:(TwitterSearchRequest*)request didFinishWithResponse:(TwitterSearchResponse*)response;
 {
-    if(response.succeed)
+    if(response.success)
     {
         self.results = response.searchResults;
         [tableView reloadData];
