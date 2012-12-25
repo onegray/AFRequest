@@ -114,6 +114,7 @@
 	if(!strongOp.acceptableContentTypes && connection.acceptableContentTypes) {
 		strongOp.acceptableContentTypes = connection.acceptableContentTypes;
 	}
+	[strongOp performSelector:@selector(overloadExtentions)];
 	[self setOperation:strongOp];
 	_cancelled = strongOp.isCancelled;
 	[connection enqueueHTTPRequestOperation:strongOp];
@@ -176,7 +177,7 @@ static char CONTENT_TYPES_KEY;
 	objc_setAssociatedObject(self, &CONTENT_TYPES_KEY, contentTypes, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (BOOL)hasAcceptableStatusCode {
+- (BOOL)hasAcceptableStatusCode_overloaded {
 	if (!self.response) {
 		return NO;
 	}
@@ -190,7 +191,7 @@ static char CONTENT_TYPES_KEY;
     return !acceptableStatusCodes || [acceptableStatusCodes containsIndex:statusCode];
 }
 
-- (BOOL)hasAcceptableContentType {
+- (BOOL)hasAcceptableContentType_overloaded {
     if (!self.response) {
 		return NO;
 	}
@@ -210,6 +211,25 @@ static char CONTENT_TYPES_KEY;
     return !acceptableContentTypes || [acceptableContentTypes containsObject:contentType];
 }
 
+
+-(void) overloadMethod:(SEL)existingMethod withMethod:(SEL)overloadingMethod saveOriginalMethod:(SEL)originalMethod {
+	if( class_getInstanceMethod([self class], originalMethod) == NULL ) {
+		Method instanceMethod = class_getInstanceMethod([self class], existingMethod);
+		class_addMethod([self class], originalMethod, method_getImplementation(instanceMethod), method_getTypeEncoding(instanceMethod));
+		Method overloadingInstanceMethod = class_getInstanceMethod([self class], overloadingMethod);
+		method_exchangeImplementations(instanceMethod, overloadingInstanceMethod);
+	}
+}
+
+-(void) overloadExtentions {
+	[self overloadMethod:@selector(hasAcceptableStatusCode)
+			  withMethod:@selector(hasAcceptableStatusCode_overloaded)
+	  saveOriginalMethod:@selector(hasAcceptableStatusCode_original)];
+
+	[self overloadMethod:@selector(hasAcceptableContentType)
+			  withMethod:@selector(hasAcceptableContentType_overloaded)
+	  saveOriginalMethod:@selector(hasAcceptableContentType_original)];
+}
 
 @end
 
