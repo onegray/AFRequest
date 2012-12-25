@@ -28,23 +28,6 @@
 #import "AFConnection.h"
 #import "AFHTTPRequestOperation.h"
 
-#import <objc/objc-runtime.h>
-
-@interface AFHTTPRequestOperation(owner)
-@property (nonatomic, assign) AFRequest* ownerRequest;
-@end
-
-@implementation AFHTTPRequestOperation(owner)
-static char OWNER_KEY;
-
--(AFRequest*) ownerRequest {
-	return objc_getAssociatedObject(self, &OWNER_KEY);
-}
-
--(void) setOwnerRequest:(AFRequest*)owner {
-	objc_setAssociatedObject(self, &OWNER_KEY, owner, OBJC_ASSOCIATION_RETAIN);
-}
-@end
 
 @interface AFRequest()
 {
@@ -125,6 +108,12 @@ static char OWNER_KEY;
 {
 	_retryCount++;
 	AFHTTPRequestOperation* strongOp = _buildRequestOperation(connection, onSuccess, onFailure);
+	if(!strongOp.acceptableStatusCodes && connection.acceptableStatusCodes) {
+		strongOp.acceptableStatusCodes = connection.acceptableStatusCodes;
+	}
+	if(!strongOp.acceptableContentTypes && connection.acceptableContentTypes) {
+		strongOp.acceptableContentTypes = connection.acceptableContentTypes;
+	}
 	[self setOperation:strongOp];
 	_cancelled = strongOp.isCancelled;
 	[connection enqueueHTTPRequestOperation:strongOp];
@@ -156,8 +145,73 @@ static char OWNER_KEY;
 
 
 
+#import <objc/objc-runtime.h>
+
+@implementation AFHTTPRequestOperation(extentions)
+static char OWNER_KEY;
+static char STATUS_CODES_KEY;
+static char CONTENT_TYPES_KEY;
+
+-(AFRequest*) ownerRequest {
+	return objc_getAssociatedObject(self, &OWNER_KEY);
+}
+
+-(void) setOwnerRequest:(AFRequest*)owner {
+	objc_setAssociatedObject(self, &OWNER_KEY, owner, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(NSIndexSet*) acceptableStatusCodes {
+	return objc_getAssociatedObject(self, &STATUS_CODES_KEY);
+}
+
+-(void) setAcceptableStatusCodes:(NSIndexSet*) statusCodes {
+	objc_setAssociatedObject(self, &STATUS_CODES_KEY, statusCodes, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(NSSet*) acceptableContentTypes {
+	return objc_getAssociatedObject(self, &CONTENT_TYPES_KEY);
+}
+
+-(void) setAcceptableContentTypes:(NSSet *)contentTypes {
+	objc_setAssociatedObject(self, &CONTENT_TYPES_KEY, contentTypes, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (BOOL)hasAcceptableStatusCode {
+	if (!self.response) {
+		return NO;
+	}
+    
+	NSIndexSet* acceptableStatusCodes = [self acceptableStatusCodes];
+	if(!acceptableStatusCodes) {
+		acceptableStatusCodes = [[self class] acceptableStatusCodes];
+	}
+	
+    NSUInteger statusCode = ([self.response isKindOfClass:[NSHTTPURLResponse class]]) ? (NSUInteger)[self.response statusCode] : 200;
+    return !acceptableStatusCodes || [acceptableStatusCodes containsIndex:statusCode];
+}
+
+- (BOOL)hasAcceptableContentType {
+    if (!self.response) {
+		return NO;
+	}
+    
+	NSSet* acceptableContentTypes = [self acceptableContentTypes];
+	if(!acceptableContentTypes) {
+		acceptableContentTypes = [[self class] acceptableContentTypes];
+	}
+	
+    // Any HTTP/1.1 message containing an entity-body SHOULD include a Content-Type header field defining the media type of that body. If and only if the media type is not given by a Content-Type field, the recipient MAY attempt to guess the media type via inspection of its content and/or the name extension(s) of the URI used to identify the resource. If the media type remains unknown, the recipient SHOULD treat it as type "application/octet-stream".
+    // See http://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html
+    NSString *contentType = [self.response MIMEType];
+    if (!contentType) {
+        contentType = @"application/octet-stream";
+    }
+    
+    return !acceptableContentTypes || [acceptableContentTypes containsObject:contentType];
+}
 
 
+@end
 
 
 

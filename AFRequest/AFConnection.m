@@ -37,9 +37,6 @@
 					failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end
 
-@interface AFHTTPRequestOperation(owner)
-@property (nonatomic, assign) AFRequest* ownerRequest;
-@end
 
 @implementation AFConnection
 

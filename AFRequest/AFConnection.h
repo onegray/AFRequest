@@ -45,6 +45,9 @@
 - (void) performRequest:(AFRequest*)request;
 - (void) cancelRequestsForTarget:(id)target;
 
+@property (nonatomic, strong) NSIndexSet* acceptableStatusCodes;
+@property (nonatomic, strong) NSSet* acceptableContentTypes;
+
 @property (nonatomic, weak) id<AFConnectionDelegate> delegate;
 
 @property (nonatomic, assign) BOOL printLogs;

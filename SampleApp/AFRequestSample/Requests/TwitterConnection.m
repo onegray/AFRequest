@@ -34,6 +34,9 @@ static NSString* kTwiterHost = @"http://search.twitter.com";
 
 		[self registerHTTPOperationClass:[AFJSONRequestOperation class]];
 		
+		self.acceptableStatusCodes = [NSIndexSet indexSetWithIndex:200];
+		self.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+		
 		[self setDefaultHeader:@"Accept" value:@"application/json"];
 		[self setDefaultHeader:@"Content-Type" value:@"application/json"];
 		

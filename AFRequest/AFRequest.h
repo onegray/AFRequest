@@ -24,8 +24,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperation.h"
 
-@class AFConnection, AFRequest, AFResponse, AFHTTPRequestOperation;
+@class AFConnection, AFRequest, AFResponse;
 
 
 @interface AFRequest : NSObject
@@ -54,4 +55,11 @@
 - (void) requestDidFinishWithResponseObject:(id)parsedResult;
 - (void) requestDidFailWithError:(NSError*)error;
 
+@end
+
+
+@interface AFHTTPRequestOperation(extentions)
+@property (atomic, strong) AFRequest* ownerRequest;
+@property (atomic, strong) NSIndexSet* acceptableStatusCodes;
+@property (atomic, strong) NSSet* acceptableContentTypes;
 @end
