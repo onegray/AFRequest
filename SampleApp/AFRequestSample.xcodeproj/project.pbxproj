@@ -19,6 +19,10 @@
 		ABB25937168724FE004A62EB /* AFConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB25932168724FE004A62EB /* AFConnection.m */; };
 		ABB25938168724FE004A62EB /* AFRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB25934168724FE004A62EB /* AFRequest.m */; };
 		ABB25939168724FE004A62EB /* AFResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB25936168724FE004A62EB /* AFResponse.m */; };
+		ABB259C6168A4BDA004A62EB /* MySpaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB259C5168A4BD9004A62EB /* MySpaceViewController.m */; };
+		ABB259C9168A57B4004A62EB /* MySpaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB259C8168A57B3004A62EB /* MySpaceViewController.xib */; };
+		ABB259D6168AF23C004A62EB /* MySpaceConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB259D5168AF23C004A62EB /* MySpaceConnection.m */; };
+		ABB259D9168AF345004A62EB /* MSPeopleSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB259D8168AF345004A62EB /* MSPeopleSearchRequest.m */; };
 		ABCE2ED7167E7C4300E671E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE2ED6167E7C4300E671E7 /* UIKit.framework */; };
 		ABCE2ED9167E7C4300E671E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE2ED8167E7C4300E671E7 /* Foundation.framework */; };
 		ABCE2EDB167E7C4300E671E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCE2EDA167E7C4300E671E7 /* CoreGraphics.framework */; };
@@ -59,6 +63,13 @@
 		ABB25934168724FE004A62EB /* AFRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRequest.m; sourceTree = "<group>"; };
 		ABB25935168724FE004A62EB /* AFResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFResponse.h; sourceTree = "<group>"; };
 		ABB25936168724FE004A62EB /* AFResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFResponse.m; sourceTree = "<group>"; };
+		ABB259C4168A4BD9004A62EB /* MySpaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySpaceViewController.h; sourceTree = "<group>"; };
+		ABB259C5168A4BD9004A62EB /* MySpaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySpaceViewController.m; sourceTree = "<group>"; };
+		ABB259C8168A57B3004A62EB /* MySpaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySpaceViewController.xib; sourceTree = "<group>"; };
+		ABB259D4168AF23C004A62EB /* MySpaceConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySpaceConnection.h; sourceTree = "<group>"; };
+		ABB259D5168AF23C004A62EB /* MySpaceConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySpaceConnection.m; sourceTree = "<group>"; };
+		ABB259D7168AF345004A62EB /* MSPeopleSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSPeopleSearchRequest.h; sourceTree = "<group>"; };
+		ABB259D8168AF345004A62EB /* MSPeopleSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSPeopleSearchRequest.m; sourceTree = "<group>"; };
 		ABCE2ED2167E7C4300E671E7 /* AFRequestSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AFRequestSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCE2ED6167E7C4300E671E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABCE2ED8167E7C4300E671E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +148,17 @@
 			path = ../AFRequest;
 			sourceTree = "<group>";
 		};
+		ABB259D3168AF206004A62EB /* MySpaceConnection */ = {
+			isa = PBXGroup;
+			children = (
+				ABB259D4168AF23C004A62EB /* MySpaceConnection.h */,
+				ABB259D5168AF23C004A62EB /* MySpaceConnection.m */,
+				ABB259D7168AF345004A62EB /* MSPeopleSearchRequest.h */,
+				ABB259D8168AF345004A62EB /* MSPeopleSearchRequest.m */,
+			);
+			name = MySpaceConnection;
+			sourceTree = "<group>";
+		};
 		ABCE2EC7167E7C4300E671E7 = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +193,16 @@
 		ABCE2EDC167E7C4300E671E7 /* AFRequestSample */ = {
 			isa = PBXGroup;
 			children = (
-				ABDA05BC16837F11006FBBE0 /* Requests */,
+				ABDA05BC16837F11006FBBE0 /* TwitterConnection */,
+				ABB259D3168AF206004A62EB /* MySpaceConnection */,
 				ABCE2EE5167E7C4300E671E7 /* AppDelegate.h */,
 				ABCE2EE6167E7C4300E671E7 /* AppDelegate.m */,
 				ABDA05C5168389B5006FBBE0 /* TwitterViewController.h */,
 				ABDA05C6168389B5006FBBE0 /* TwitterViewController.m */,
 				ABDA05C7168389B5006FBBE0 /* TwitterViewController.xib */,
+				ABB259C4168A4BD9004A62EB /* MySpaceViewController.h */,
+				ABB259C5168A4BD9004A62EB /* MySpaceViewController.m */,
+				ABB259C8168A57B3004A62EB /* MySpaceViewController.xib */,
 				ABCE2EDD167E7C4300E671E7 /* Supporting Files */,
 			);
 			path = AFRequestSample;
@@ -193,7 +219,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		ABDA05BC16837F11006FBBE0 /* Requests */ = {
+		ABDA05BC16837F11006FBBE0 /* TwitterConnection */ = {
 			isa = PBXGroup;
 			children = (
 				ABDA05BE16837FAE006FBBE0 /* TwitterSearchRequest.h */,
@@ -201,6 +227,7 @@
 				ABDA05C916839AAE006FBBE0 /* TwitterConnection.h */,
 				ABDA05CA16839AAE006FBBE0 /* TwitterConnection.m */,
 			);
+			name = TwitterConnection;
 			path = Requests;
 			sourceTree = "<group>";
 		};
@@ -257,6 +284,7 @@
 			files = (
 				ABCE2EE1167E7C4300E671E7 /* InfoPlist.strings in Resources */,
 				ABDA05CC16839D14006FBBE0 /* TwitterViewController.xib in Resources */,
+				ABB259C9168A57B4004A62EB /* MySpaceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +312,9 @@
 				ABB25937168724FE004A62EB /* AFConnection.m in Sources */,
 				ABB25938168724FE004A62EB /* AFRequest.m in Sources */,
 				ABB25939168724FE004A62EB /* AFResponse.m in Sources */,
+				ABB259C6168A4BDA004A62EB /* MySpaceViewController.m in Sources */,
+				ABB259D6168AF23C004A62EB /* MySpaceConnection.m in Sources */,
+				ABB259D9168AF345004A62EB /* MSPeopleSearchRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

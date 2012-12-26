@@ -9,15 +9,21 @@
 #import "AppDelegate.h"
 
 #import "TwitterViewController.h"
+#import "MySpaceViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	UIViewController* vc = [[TwitterViewController alloc] initWithNibName:nil bundle:nil];
-	self.window.rootViewController = vc;
+	
+	UIViewController *vc1 = [[TwitterViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *vc2 = [[MySpaceViewController alloc] initWithNibName:nil bundle:nil];
+    UITabBarController* tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:vc1, vc2, nil];
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
